@@ -7,11 +7,13 @@ document.addEventListener("DOMContentLoaded", generate);
 generateBtn.addEventListener("click", generate);
 
 function generate(e) {
+  showSpinner();
   fetch("https://randomuser.me/api")
     .then((response) => {
       return response.json();
     })
     .then((data) => {
+      hideSpinner();
       const user = data.results[0];
       const name = `${user.name.first} ${user.name.last}`;
       const email = user.email;
@@ -50,4 +52,12 @@ function generate(e) {
         document.body.style.backgroundColor = "rebeccapurple";
       }
     });
+}
+
+function showSpinner() {
+  document.querySelector(".spinner").style.display = "block";
+}
+
+function hideSpinner() {
+  document.querySelector(".spinner").style.display = "none";
 }
